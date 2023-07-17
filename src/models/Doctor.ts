@@ -1,8 +1,9 @@
+import { Specialty } from '../shared/enums/Specialty';
 import { Appointment } from './Appointment';
 import { User } from './User';
 
 export class Doctor extends User {
-  specialty: string;
+  specialty: Specialty;
 
   constructor(
     id: number,
@@ -10,7 +11,7 @@ export class Doctor extends User {
     password: string,
     email: string,
     phone: string,
-    specialty: string,
+    specialty: Specialty,
   ) {
     super(id, username, password, email, phone);
     this.specialty = specialty;
