@@ -1,7 +1,7 @@
 {
   "name": "mockapigenius",
   "version": "1.0.0",
-  "description": "Tools for mocking REST APIs for front-end development and testing",
+  "description": "Benchmark/Explore of different Tools for mocking REST APIs for front-end development and testing",
   "scripts": {
     "test": "jest --coverage false ",
     "lint": "eslint . --ext .ts",

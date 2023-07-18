@@ -1,6 +1,6 @@
 # MockAPIgenius
 
-Tools for mocking REST APIs for front-end development and testing
+Benchmark/Explore of different Tools for mocking REST APIs for front-end development and testing
 
 ## Subject:
 
