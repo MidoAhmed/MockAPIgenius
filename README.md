@@ -1,6 +1,6 @@
-# MockAPIgenius
+# MockAPIexplorer
 
-Benchmark/Explore of different Tools for mocking REST APIs for front-end development and testing
+This repo is a Benchmark/Explore of different/collection tools for mocking REST APIs for front-end development and testing
 
 ## Subject:
 
@@ -13,18 +13,16 @@ When it comes to mocking APIs for front-end development & testing, there are two
 
 Goal ==> Explore different tools for mocking REST APIs for front-end development and testing.
 
-## Note:
-
-This project is a benchmark of different tools and technologies for mocking REST APIs.
+## Tools:
 
 **Tested tools and technologies include (branch by tool):**
 
 - [Mirage JS](https://miragejs.com/)
-- [MSW](https://mswjs.io/)
-- [json-server](https://github.com/typicode/json-server)
-- [fetch-mock](http://www.wheresrhys.co.uk/fetch-mock/)
-- [nock](https://github.com/nock/nock)
-- [superagent](https://ladjs.github.io/superagent/)
+- ~~[MSW](https://mswjs.io/)~~ (not tested yet)
+- ~~[json-server](https://github.com/typicode/json-server)~~ (not tested yet)
+- ~~[fetch-mock](http://www.wheresrhys.co.uk/fetch-mock/)~~ (not tested yet)
+- ~~[nock](https://github.com/nock/nock)~~ (not tested yet)
+- ~~[superagent](https://ladjs.github.io/superagent/)~~ (not tested yet)
 
 > Other tools that may be tested in the future include:
 
@@ -33,16 +31,6 @@ This project is a benchmark of different tools and technologies for mocking REST
 - [MockServer](https://www.mock-server.com/)
 
 Tools and technologies used in this project are not necessarily recommended for production use.
-
-## Table of Contents
-
-- [About](#about)
-- [Getting Started](#getting-started)
-- [License](#license)
-
-## About
-
-This project is a collection of tools for mocking REST APIs for front-end development and testing. It is a work in progress.
 
 ## Getting Started
 
@@ -65,7 +53,3 @@ This project is a collection of tools for mocking REST APIs for front-end develo
    $ npm test # run tests with jest to test the miragejs mock api server
 
    ```
-
-## License
-
-MIT License

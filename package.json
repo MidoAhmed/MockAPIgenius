@@ -1,5 +1,5 @@
 {
-  "name": "mockapigenius",
+  "name": "mockapiexplorer",
   "version": "1.0.0",
   "description": "Benchmark/Explore of different Tools for mocking REST APIs for front-end development and testing",
   "scripts": {
