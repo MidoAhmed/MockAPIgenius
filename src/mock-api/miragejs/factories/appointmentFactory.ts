@@ -1,0 +1,17 @@
+import { Factory } from 'miragejs';
+import { faker } from '@faker-js/faker';
+import { AppointmentStatus } from '../../../shared/enums/AppointmentStatus';
+import { Appointment } from '../../../models/Appointment';
+
+export const appointmentFactory = Factory.extend<Partial<Appointment>>({
+  //patientId: () => {},
+  //providerId: () => {},
+  dateTime: () => faker.date.future(),
+  status: () => faker.helpers.enumValue(AppointmentStatus),
+  afterCreate(prescription, server) {
+    prescription.update({
+      patient: server.create('patient'),
+      doctor: server.create('doctor'),
+    });
+  },
+} as Record<string, unknown>);

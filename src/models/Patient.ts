@@ -7,12 +7,12 @@ export class Patient extends User {
   constructor(
     id: number,
     username: string,
-    password: string,
     email: string,
     phone: string,
+    address: string,
     medicalHistory: string,
   ) {
-    super(id, username, password, email, phone);
+    super(id, username, email, phone, address);
     this.medicalHistory = medicalHistory;
   }
 
@@ -24,9 +24,7 @@ export class Patient extends User {
     // Logic for cancelling an appointment
   }
 
-    viewAppointments(): void {
+  viewAppointments(): void {
     // Logic for viewing appointments
-    }
-
-    
+  }
 }

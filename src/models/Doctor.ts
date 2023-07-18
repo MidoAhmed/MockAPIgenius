@@ -8,12 +8,12 @@ export class Doctor extends User {
   constructor(
     id: number,
     username: string,
-    password: string,
     email: string,
     phone: string,
+    address: string,
     specialty: Specialty,
   ) {
-    super(id, username, password, email, phone);
+    super(id, username, email, phone, address);
     this.specialty = specialty;
   }
 
