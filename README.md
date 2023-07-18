@@ -2,6 +2,17 @@
 
 Tools for mocking REST APIs for front-end development and testing
 
+## Subject:
+
+When it comes to mocking APIs for front-end development & testing, there are two main approaches you can consider:
+
+1. Server-Side Mocking.
+2. **Client-Side Mocking**
+   - Tools: (MirageJS, MSW, JSON Server, etc…)
+   - Manual Mocking: (writing mock data / functions in a file and importing it in the test file)
+
+Goal ==> Explore different tools for mocking REST APIs for front-end development and testing.
+
 ## Note:
 
 This project is a benchmark of different tools and technologies for mocking REST APIs.
@@ -44,6 +55,8 @@ This project is a collection of tools for mocking REST APIs for front-end develo
   $ cd mockapigenius
   $ npm install
   ```
+
+### Explore tools
 
 1. Mirage JS
 
