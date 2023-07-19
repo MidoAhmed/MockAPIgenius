@@ -1,12 +1,13 @@
 import { Server } from 'miragejs';
 import { AnyRegistry } from 'miragejs/-types';
 import { makeServer } from '../mock-api/miragejs/server';
+import { Environment } from '../mock-api/miragejs/constants';
 
 describe('MirageJS Server', () => {
   let server: Server<AnyRegistry>;
 
   beforeEach(() => {
-    server = makeServer({ environment: 'test' });
+    server = makeServer({ environment: Environment.Test });
   });
 
   afterEach(() => {
@@ -38,6 +39,7 @@ describe('MirageJS Server', () => {
 
     expect(appointment).not.toBeNull();
     expect(appointment).not.toBeUndefined();
+    expect(server.db.appointments.length).toEqual(1);
     expect(appointment).toHaveProperty('doctor');
     expect(appointment).toHaveProperty('patient');
   });
@@ -53,6 +55,7 @@ describe('MirageJS Server', () => {
   it('should handle DELETE /appointments/:id request', async () => {
     //seeds data into miragejs db for testing environment
     const createdAppointment = server.create('appointment');
+
     const response = await fetch(`/api/appointments/${createdAppointment.id}`, {
       method: 'DELETE',
     });
@@ -152,6 +155,27 @@ describe('MirageJS Server', () => {
     expect(error).toEqual({ error: 'doctor not found' });
   });
 
+  it('should handle PUT /appointments/:id request', async () => {
+    const createdAppointment = server.create('appointment');
+
+    //appointment to be updated
+    const updatedAppointment = {
+      id: createdAppointment.id,
+      dateTime: '2023-07-19T10:00:00.000Z',
+      status: 'Scheduled',
+    };
+
+    const response = await fetch(`/api/appointments/${updatedAppointment.id}`, {
+      method: 'PUT',
+      body: JSON.stringify(updatedAppointment),
+    });
+
+    expect(response.status).toBe(204);
+    const foundAppointment = server.db.appointments.find(updatedAppointment.id);
+    expect(updatedAppointment.dateTime).toEqual(foundAppointment.dateTime);
+    expect(updatedAppointment.status).toEqual(foundAppointment.status);
+  });
+
   it('should handle POST /doctors request', async () => {
     const newDoctor = {
       specialty: 'Neurology',
@@ -163,9 +187,6 @@ describe('MirageJS Server', () => {
 
     const response = await fetch(`/api/doctors`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
       body: JSON.stringify(newDoctor),
     });
 

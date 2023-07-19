@@ -1,7 +1,6 @@
 import { Factory } from 'miragejs';
 import { faker } from '@faker-js/faker';
 import { AppointmentStatus } from '../../../shared/enums/AppointmentStatus';
-import { Appointment } from '../../../models/Appointment';
 
 export const appointmentFactory = Factory.extend({
   //patientId: () => {},

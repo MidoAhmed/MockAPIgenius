@@ -1,34 +1,27 @@
+import { createServer, Response } from 'miragejs';
+import scenarios from './scenarios';
+import { Environment, Scenario } from './constants';
+import { Appointment, Doctor, Patient, Prescription } from './models';
+import { ApplicationSerializer, AppointmentSerializer } from './serializers';
 import {
-  belongsTo,
-  createServer,
-  Model,
-  Response,
-  RestSerializer,
-  Serializer,
-} from 'miragejs';
-import { doctorFactory } from './factories/doctorFactory';
-import { patientFactory } from './factories/patientFactory';
-import { appointmentFactory } from './factories/appointmentFactory';
-import { prescriptionFactory } from './factories/prescriptionFactory';
-import { ApplicationSerializer } from './serializers/applicationSerializer';
-import { AppointmentSerializer } from './serializers/appointmentSerializer';
+  doctorFactory,
+  patientFactory,
+  appointmentFactory,
+  prescriptionFactory,
+} from './factories';
 
-export function makeServer({ environment = 'development' } = {}) {
+export function makeServer({ environment = Environment.Development } = {}) {
+  // Choose one scenario to switch your development state between different scenarios
+  const currentScenario = Scenario.Scenario1;
+
   const server = createServer({
     environment, // default is development
     namespace: 'api',
     models: {
-      doctor: Model,
-      patient: Model,
-      appointment: Model.extend({
-        doctor: belongsTo('doctor', {
-          inverse: 'appointments',
-        }),
-        patient: belongsTo('patient'),
-      }),
-      prescription: Model.extend({
-        appointment: belongsTo('appointment'),
-      }),
+      doctor: Doctor,
+      patient: Patient,
+      appointment: Appointment,
+      prescription: Prescription,
     },
     factories: {
       doctor: doctorFactory,
@@ -41,10 +34,8 @@ export function makeServer({ environment = 'development' } = {}) {
       appointment: AppointmentSerializer,
     },
 
-    seeds(server) {
-      // seeds are ignored when environment is "test"
-      server.createList('appointment', 10);
-    },
+    // seeds are ignored when environment is "test"
+    seeds: scenarios[currentScenario],
 
     routes() {
       //appointments routes
@@ -53,8 +44,6 @@ export function makeServer({ environment = 'development' } = {}) {
       this.get('/appointments/:id');
 
       this.del('/appointments/:id');
-
-      // this.post('/appointments');
 
       this.post('/appointments', (schema, request) => {
         const attrs = JSON.parse(request.requestBody);
@@ -80,17 +69,44 @@ export function makeServer({ environment = 'development' } = {}) {
         return schema.create('appointment', attrs);
       });
 
-      /* this.put('/appointments/:id', (schema, request) => {
+      this.put('/appointments/:id', (schema, request) => {
         const id = request.params.id;
         const attrs = JSON.parse(request.requestBody);
         const appointment = schema.find('appointment', id);
-        return appointment ? appointment.update(attrs) : new Response(404);
-      });
-      */
 
+        // Check if appointment record exists
+        if (!appointment) {
+          return new Response(404, {}, { error: 'appointment not found' });
+        }
+
+        appointment.update(attrs);
+        return new Response(204);
+      });
+
+      //doctors routes
       this.post('/doctors', (schema, request) => {
         const attrs = JSON.parse(request.requestBody);
         return schema.create('doctor', attrs);
+      });
+
+      this.get('/doctors');
+
+      this.get('/doctors/:id');
+
+      this.del('/doctors/:id');
+
+      this.put('/doctors/:id', (schema, request) => {
+        const id = request.params.id;
+        const attrs = JSON.parse(request.requestBody);
+        const doctor = schema.find('doctor', id);
+
+        // Check if doctor record exists
+        if (!doctor) {
+          return new Response(404, {}, { error: 'doctor not found' });
+        }
+
+        doctor.update(attrs);
+        return new Response(204);
       });
     },
   });
