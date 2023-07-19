@@ -3,7 +3,7 @@ import { faker } from '@faker-js/faker';
 import { Specialty } from '../../../shared/enums/Specialty';
 import { Doctor } from '../../../models/Doctor';
 
-export const doctorFactory = Factory.extend<Partial<Doctor>>({
+export const doctorFactory = Factory.extend({
   email: () => faker.internet.email(),
   username: () => faker.internet.userName(),
   phone: () => faker.phone.number(),

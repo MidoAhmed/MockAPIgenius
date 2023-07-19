@@ -3,13 +3,13 @@ import { faker } from '@faker-js/faker';
 import { AppointmentStatus } from '../../../shared/enums/AppointmentStatus';
 import { Appointment } from '../../../models/Appointment';
 
-export const appointmentFactory = Factory.extend<Partial<Appointment>>({
+export const appointmentFactory = Factory.extend({
   //patientId: () => {},
   //providerId: () => {},
   dateTime: () => faker.date.future(),
   status: () => faker.helpers.enumValue(AppointmentStatus),
-  afterCreate(prescription, server) {
-    prescription.update({
+  afterCreate(appointment, server) {
+    appointment.update({
       patient: server.create('patient'),
       doctor: server.create('doctor'),
     });

@@ -1,4 +1,11 @@
-import { belongsTo, createServer, Model, Response } from 'miragejs';
+import {
+  belongsTo,
+  createServer,
+  Model,
+  Response,
+  RestSerializer,
+  Serializer,
+} from 'miragejs';
 import { doctorFactory } from './factories/doctorFactory';
 import { patientFactory } from './factories/patientFactory';
 import { appointmentFactory } from './factories/appointmentFactory';
@@ -14,7 +21,9 @@ export function makeServer({ environment = 'development' } = {}) {
       doctor: Model,
       patient: Model,
       appointment: Model.extend({
-        doctor: belongsTo('doctor'),
+        doctor: belongsTo('doctor', {
+          inverse: 'appointments',
+        }),
         patient: belongsTo('patient'),
       }),
       prescription: Model.extend({
@@ -38,21 +47,36 @@ export function makeServer({ environment = 'development' } = {}) {
     },
 
     routes() {
+      //appointments routes
       this.get('/appointments');
 
       this.get('/appointments/:id');
 
       this.del('/appointments/:id');
 
-      /* this.get('/appointments/:id', (schema, request) => {
-        const id = request.params.id;
-        const appointment = schema.find('appointment', id);
-        return appointment ? appointment : new Response(404);
-      });
-    */
+      // this.post('/appointments');
 
       this.post('/appointments', (schema, request) => {
         const attrs = JSON.parse(request.requestBody);
+
+        // Check if doctorId is provided
+        if (!attrs.doctorId) {
+          return new Response(400, {}, { error: 'doctorId is required' });
+        }
+
+        // Check if doctorId is invalid
+        if (isNaN(attrs.doctorId)) {
+          return new Response(400, {}, { error: 'doctorId is invalid' });
+        }
+
+        // Find the doctor
+        const doctor = schema.find('doctor', attrs.doctorId);
+
+        // Check if doctor record exists
+        if (!doctor) {
+          return new Response(404, {}, { error: 'doctor not found' });
+        }
+
         return schema.create('appointment', attrs);
       });
 
@@ -63,6 +87,11 @@ export function makeServer({ environment = 'development' } = {}) {
         return appointment ? appointment.update(attrs) : new Response(404);
       });
       */
+
+      this.post('/doctors', (schema, request) => {
+        const attrs = JSON.parse(request.requestBody);
+        return schema.create('doctor', attrs);
+      });
     },
   });
 

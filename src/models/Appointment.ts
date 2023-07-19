@@ -2,20 +2,20 @@ import { AppointmentStatus } from '../shared/enums/AppointmentStatus';
 
 export class Appointment {
   id: number;
-  patientId: number;
+  doctorId: number;
   providerId: number;
   dateTime: Date;
   status: AppointmentStatus;
 
   constructor(
     id: number,
-    patientId: number,
+    doctorId: number,
     providerId: number,
     dateTime: Date,
     status: AppointmentStatus,
   ) {
     this.id = id;
-    this.patientId = patientId;
+    this.doctorId = doctorId;
     this.providerId = providerId;
     this.dateTime = dateTime;
     this.status = status;
