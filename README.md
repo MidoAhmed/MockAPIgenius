@@ -18,7 +18,7 @@ Goal ==> Explore different tools for mocking REST APIs for front-end development
 **Tested tools and technologies include (branch by tool):**
 
 - [Mirage JS](https://miragejs.com/)
-- [MSW](https://mswjs.io/)
+- [MSW](https://mswjs.io/) + [@mswjs/data](https://github.com/mswjs/data)
 - ~~[json-server](https://github.com/typicode/json-server)~~ (not tested yet)
 - ~~[fetch-mock](http://www.wheresrhys.co.uk/fetch-mock/)~~ (not tested yet)
 - ~~[nock](https://github.com/nock/nock)~~ (not tested yet)
@@ -39,9 +39,8 @@ Tools and technologies used in this project are not necessarily recommended for 
 - Node.js ( v18.16.0 used)
 - Clone the repo:
   ```sh
-  $ git clone https://github.com/MidoAhmed/MockAPIgenius.git
-  $ cd mockapigenius
-  $ npm install
+  $ git clone https://github.com/MidoAhmed/mock-api-explorer.git
+  $ cd mock-api-explorer
   ```
 
 ### Explore tools
@@ -50,6 +49,25 @@ Tools and technologies used in this project are not necessarily recommended for 
 
    ```sh
    $ git checkout miragejs
+   $ npm install
    $ npm test # run tests with jest to test the miragejs mock api server
 
    ```
+
+2. MSW
+
+   ```sh
+   $ git checkout msw
+   $ npm install
+   $ npm test # run tests with jest to test the MSW mock api server
+
+   ```
+
+### Comparison
+
+| Criteria      | MirageJS |            MSW |    json-server | Nock | Fetch-mock | Superagent |
+| :------------ | :------: | -------------: | -------------: | ---- | ---------- | ---------- |
+| Supported API |   REST   | REST / GraphQL |           REST | REST |            |            |
+| Environments  | Browser  | Node / Browser | Node / Browser | Node |            |            |
+| Integration   |          |                |                |      |            |            |
+| Definition    |          |                |                |      |            |            |
