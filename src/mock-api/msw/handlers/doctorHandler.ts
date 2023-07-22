@@ -13,5 +13,9 @@ export const doctorHandlers: RestHandler<MockedRequest<DefaultBodyType>>[] = [
   ...db.doctor.toHandlers('rest'),
 
   // add other custom handlers here if needed ...
-  // rest.get('/doctors', (req, res, ctx) => {}),
+  /* rest.post('/doctors', async (req, res, ctx) => {
+    const attrs = await req.json();
+    const doctor = db.doctor.create(attrs);
+    return res(ctx.status(201), ctx.json(doctor));
+  }), */
 ];

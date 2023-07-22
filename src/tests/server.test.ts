@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { server } from '../mock-api/server';
+import { server } from '../mock-api/msw/server';
 import 'whatwg-fetch';
 
 // Test suite for MSW Server
@@ -88,6 +88,31 @@ describe('MSW Server', () => {
 
     expect(response.status).toEqual(200);
     expect(server.db.doctor.count()).toEqual(0);
+  });
+
+  // Test case for /doctors endpoint handler (POST)
+  it('should create a doctor', async () => {
+    const newDoctor = {
+      specialty: 'Neurology',
+      address: '7828 Clyde Ville',
+      phone: '(617) 303-8504 x30926',
+      username: 'Magdalena30',
+      email: 'Rusty84@hotmail.com',
+    };
+
+    const response = await fetch(`/doctors`, {
+      method: 'POST',
+      body: JSON.stringify(newDoctor),
+    });
+
+    const doctor = await response.json();
+
+    expect(response.status).toEqual(201);
+    expect(doctor).not.toBeNull();
+    expect(doctor).not.toBeUndefined();
+    expect(doctor.id).not.toBeNull();
+    expect(doctor.id).not.toBeUndefined();
+    expect(server.db.doctor.count()).toEqual(1);
   });
 
   //Test case for /patients endpoint handler (GET)

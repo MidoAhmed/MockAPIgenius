@@ -1,6 +1,6 @@
 import { primaryKey } from '@mswjs/data';
 import { faker } from '@faker-js/faker';
-import { Specialty } from '../../shared/enums/Specialty';
+import { Specialty } from '../../../shared/enums/Specialty';
 
 // Create a "doctor" factory model
 export const doctor = {
