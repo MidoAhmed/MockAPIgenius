@@ -18,7 +18,7 @@ Goal ==> Explore different tools for mocking REST APIs for front-end development
 **Tested tools and technologies include (branch by tool):**
 
 - [Mirage JS](https://miragejs.com/)
-- ~~[MSW](https://mswjs.io/)~~ (not tested yet)
+- [MSW](https://mswjs.io/)
 - ~~[json-server](https://github.com/typicode/json-server)~~ (not tested yet)
 - ~~[fetch-mock](http://www.wheresrhys.co.uk/fetch-mock/)~~ (not tested yet)
 - ~~[nock](https://github.com/nock/nock)~~ (not tested yet)
