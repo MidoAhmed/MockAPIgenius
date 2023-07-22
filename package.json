@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Benchmark/Explore of different Tools for mocking REST APIs for front-end development and testing",
   "scripts": {
-    "test": "jest --coverage false ",
+    "test": "jest --coverage=false",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix"
   },
@@ -14,7 +14,6 @@
     "@faker-js/faker": "^8.0.2",
     "@types/jest": "^29.5.2",
     "@types/node": "^20.4.2",
-    "@types/uuid": "^9.0.2",
     "@typescript-eslint/eslint-plugin": "^5.61.0",
     "@typescript-eslint/parser": "^5.61.0",
     "eslint": "^8.44.0",
@@ -26,8 +25,5 @@
     "prettier": "^3.0.0",
     "ts-jest": "^29.1.1",
     "typescript": "^5.1.6"
-  },
-  "dependencies": {
-    "uuid": "^9.0.0"
   }
 }
